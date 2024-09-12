@@ -1,6 +1,7 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext } from 'react'
 import Quotes from './Quotes'
 import QuoteForm from './QuoteForm'
+import { QuotesContext } from '../context/quotesContext'
 
 const CREATE_QUOTE = 'CREATE_QUOTE'
 const DELETE_QUOTE = 'DELETE_QUOTE'
@@ -65,7 +66,8 @@ const reducer = (state, action) => {
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
-
+  const quotesData=useContext(QuotesContext)
+  console.log(quotesData.test)
   const createQuote = ({ authorName, quoteText }) => {
     const newQuote = { id: getNextId(), authorName, quoteText, apocryphal: false }
     dispatch({ type: CREATE_QUOTE, payload: newQuote })
